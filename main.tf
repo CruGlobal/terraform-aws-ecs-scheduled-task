@@ -147,6 +147,15 @@ resource "aws_ecs_task_definition" "default" {
   # https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#network_mode
   network_mode = "awsvpc"
 
+  # The docker volumes that the task will make available to its containers.
+  # https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#volumes
+  dynamic "volume" {
+    for_each = var.volumes
+    content {
+      name = volume.key.name
+    }
+  }
+
   # A mapping of tags to assign to the resource.
   tags = merge({ "Name" = var.name }, var.tags)
 }
