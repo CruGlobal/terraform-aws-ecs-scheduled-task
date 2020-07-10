@@ -40,6 +40,10 @@ module "ecs_scheduled_task" {
   create_ecs_task_execution_role = false
   ecs_task_execution_role_arn    = aws_iam_role.ecs_task_execution.arn
 
+  volumes = [{
+    name = "example-volume"
+  }]
+
   tags = {
     Environment = "prod"
   }

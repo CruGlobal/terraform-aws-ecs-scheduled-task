@@ -118,3 +118,11 @@ variable "ecs_task_execution_role_arn" {
   type        = string
   description = "The ARN of the ECS Task Execution IAM Role."
 }
+
+variable "volumes" {
+  default = []
+  type = set(object({
+    name = string
+  }))
+  description = "The non-persistent data volumes to be used by the task."
+}
